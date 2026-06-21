@@ -1,6 +1,6 @@
 # ASCII Terminal Raycaster
 
-This is a 3D raycasting engine that runs entirely inside your terminal. No graphics libraries, no game engines — just C++, some trigonometry, and a lot of ASCII characters pretending to be walls.
+This is a 3D raycasting engine that runs entirely inside your terminal. No graphics libraries, no game engines - just C++, some trigonometry, and a lot of ASCII characters pretending to be walls.
 
 The idea is basically the same trick Wolfenstein 3D used in 1992. You stand in a 2D grid, shoot a ray out for every column of pixels on the screen, measure how far it travels before hitting a wall, and draw a vertical slice based on that distance. Do that 120 times per frame and you get something that looks surprisingly like a 3D world.
 
@@ -25,12 +25,12 @@ The idea is basically the same trick Wolfenstein 3D used in 1992. You stand in a
 
 For each of the 120 screen columns, we calculate a ray angle spread evenly across the player's 60° field of view. Then we need to figure out how far that ray travels before it hits a wall.
 
-The naive approach — stepping along the ray in tiny fixed increments — is slow and can miss thin walls entirely. Instead we use **DDA (Digital Differential Analyzer)**, which jumps directly from one grid cell boundary to the next. It's much faster and never skips anything.
+The naive approach - stepping along the ray in tiny fixed increments - is slow and can miss thin walls entirely. Instead we use **DDA (Digital Differential Analyzer)**, which jumps directly from one grid cell boundary to the next. It's much faster and never skips anything.
 
 The rough idea:
 1. Work out how much ray length is consumed each time you cross a vertical vs. horizontal grid line
 2. Always step toward whichever boundary is closer
-3. After each step, check if the new cell is a wall — if it is, you're done
+3. After each step, check if the new cell is a wall - if it is, you're done
 
 The result is an exact hit with the minimum number of steps.
 
@@ -38,7 +38,7 @@ The result is an exact hit with the minimum number of steps.
 
 There's a subtle problem with raw ray distances: rays shot toward the edges of the screen are longer than rays shot straight ahead, even if they're hitting the same flat wall. If you draw wall slices based on raw distance, the walls bow outward in a fisheye curve.
 
-The fix is one line — multiply the distance by the cosine of the angle between the ray and the player's forward direction. That projects the ray length onto the view plane and gives you the true perpendicular distance, which keeps walls flat.
+The fix is one line - multiply the distance by the cosine of the angle between the ray and the player's forward direction. That projects the ray length onto the view plane and gives you the true perpendicular distance, which keeps walls flat.
 
 ```
 correctedDistance = rayLength * cos(rayAngle - playerAngle)
