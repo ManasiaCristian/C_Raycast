@@ -3,6 +3,7 @@
 This is a 3D raycasting engine that runs entirely inside your terminal. No graphics libraries, no game engines — just C++, some trigonometry, and a lot of ASCII characters pretending to be walls.
 
 The idea is basically the same trick Wolfenstein 3D used in 1992. You stand in a 2D grid, shoot a ray out for every column of pixels on the screen, measure how far it travels before hitting a wall, and draw a vertical slice based on that distance. Do that 120 times per frame and you get something that looks surprisingly like a 3D world.
+
 <img width="1442" height="925" alt="image" src="https://github.com/user-attachments/assets/d0653d99-1d9b-4de7-8b57-30a6f7309f91" />
 
 ## Controls
